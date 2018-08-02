@@ -1,0 +1,2 @@
+CREATE DATABASE Plantsy_db
+USE Plantsy_db
