@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-	var Plant = sequelize.define("Author", {
+	var Plants = sequelize.define("Plant", {
 
 		name: {
 			type: DataTypes.STRING,
@@ -19,5 +19,5 @@ module.exports = function (sequelize, DataTypes) {
 			validate: [1]
 		}
 	});
-	return Plant;
+	return Plants;
 };
