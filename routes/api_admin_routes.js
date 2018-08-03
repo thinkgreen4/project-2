@@ -8,4 +8,8 @@ module.exports = function(app) {
 			res.render("admin", plants);
 		});
 	});
+
+	app.post("/admin", function(req, res) {
+		db.Plants.create(req.body);
+	})
 };

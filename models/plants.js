@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
 			allowNull: false,
 			validate: [1]
 		},
-		instruction: {
+		instructions: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: [1]
