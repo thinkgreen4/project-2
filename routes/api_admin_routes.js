@@ -37,4 +37,12 @@ module.exports = function(app) {
 			res.json(data);
 		});
 	});
+
+	app.put("admin/edit/:id", function(req, res) {
+		db.Plant.update(req.body, {
+			where: {
+				id: req.params.id
+			}
+		});
+	});
 };

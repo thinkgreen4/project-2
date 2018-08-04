@@ -12,8 +12,13 @@ $(document).ready(function() {
 		});
 	};
 
-	function editPlant(id) {
+	function editPlant(id, plant_edit) {
 		//ajax call to edit plant in the data base
+		$.ajax({
+			url: "/admin/edit/" + id,
+			method: "PUT",
+			data: plant_edit
+		}).then()
 	}
 
 	function findPlant(id) {
@@ -31,6 +36,18 @@ $(document).ready(function() {
 		// Reload Page
 			location.reload();
 		});
+	}
+
+	function displayPlant(plant) {
+		$(".selected").empty();
+
+		var selected = `
+<button class="editBtn" data-id=${plant.id}>Edit<button>
+<h1>${plant.name}</h1>
+<p>${plant.description}<p>`
+
+		// Display plant info on the webpage
+		$(".selected").append(selected);
 	}
 	
 	// This Button will be a Submit button
@@ -59,16 +76,25 @@ $(document).ready(function() {
 	// When the Plant Button is Clicked
 	$(".hold_plants .plant_click").on("click", function() {
 		// Get the info of the plant from the data base
+		
 		var id = parseInt($(this).attr("data-id"));
 		var plant = findPlant(id);
-		
-		console.log(plant);
-		
-		// Put the plant data into html code
-		var selected = `<h1>${plant.name}</h1>
-<p>${plant.description}<p>`
 
-		// Display plant info on the webpage
-		$(".selected").append(selected);
+		// Put the plant data into html code
+		displayPlant(plant);
 	});
+
+	$(".selected .editBtn").on("click", function() {
+		var id = parseInt($(this).attr("data-id"));
+
+		var plant_edit = {
+			name: "Lily",
+			description: "Either a flower or sometimes a person!",
+			instructions: "This needs to sit in Water"
+		};
+
+		editPlant(id, plant_edit);
+		var plant = findPlant(id);
+		displayPlant(plant);
+	})
 });
