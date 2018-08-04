@@ -8,7 +8,7 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get("/admin/api/:id", function(req, res) {
+	app.get("/admin/plant/:id", function(req, res) {
 		console.log(req.params.id);
 		db.Plant.findAll({
 			where: {
@@ -23,6 +23,17 @@ module.exports = function(app) {
 		console.log(req.body);
 
 		db.Plant.create(req.body).then(function(data){
+			res.json(data);
+		});
+	});
+
+	app.delete("/admin/delete/:id", function(req, res) {
+		db.Plant.destroy({
+			where: {
+				id: req.params.id
+			}
+		}).then(function(data) {
+			console.log(data);
 			res.json(data);
 		});
 	});
