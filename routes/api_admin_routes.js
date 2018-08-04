@@ -2,16 +2,28 @@ var db = require("../models");
 
 module.exports = function(app) {
 	app.get("/admin", function(req, res) {
-		db.Plants.findAll({}).then(function(plants) {
-			res.render("admin", {plant: plants});
+		console.log(db.Plant);
+		db.Plant.findAll({}).then(function(plant) {
+			res.render("admin", {plant: plant});
 		});
 	});
 
-	app.post("/admin", function(req, res) {
-		db.Plants.create({
-			name: req.body.name,
-			description: req.body.description,
-			instructions: req.body.instructions
+	app.get("/admin/api/:id", function(req, res) {
+		console.log(req.params.id);
+		db.Plant.findAll({
+			where: {
+				id: parseInt(req.params.id)
+			}
+		}).then(function(data) {
+			res.send(data[0]);
+		});
+	});
+
+	app.post("/admin/plant/create", function(req, res) {
+		console.log(req.body);
+
+		db.Plant.create(req.body).then(function(data){
+			res.json(data);
 		});
 	});
 };

@@ -6,7 +6,32 @@ $(document).ready(function() {
 		instructions: "Water it, or else it will die"
 	};
     
-	$.post("/admin", new_plant, function(reply) {
-		console.log(reply);
+	$("#plantBtn").on("click", function() {
+		$.post("/admin/plant/create", new_plant, function(reply) {
+			console.log(reply);
+			location.reload();
+		});
+	});
+
+	$(".hold_plants .deleteBtn").on("click", function() {
+		var data_id = $(this).attr("data-id");
+		var id = parseInt(data_id);
+
+		$.delete("/admin/delete/" + id, function(data) {
+			console.log(data);
+			location.reload();
+		})
+	})
+
+	$(".hold_plants .plant_click").on("click", function() {
+		var data_id = $(this).attr("data-id");
+		var id = parseInt(data_id);
+		
+		$.get("/admin/api/" + id, function(data) {
+			console.log(data);
+			var selected = `<h1>${data.name}</h1>
+<p>${data.description}<p>`
+		$(".selected").append(selected);
+		})
 	});
 });

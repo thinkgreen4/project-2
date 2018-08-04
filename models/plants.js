@@ -11,12 +11,16 @@ module.exports = function (sequelize, DataTypes) {
 		description: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			validate: [1]
+			validate: {
+				len: [1]
+			}
 		},
 		instructions: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			validate: [1]
+			validate: {
+				len: [1]
+			}
 		}
 	});
 	return Plants;
