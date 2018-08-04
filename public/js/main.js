@@ -59,7 +59,10 @@ $(document).ready(function() {
 	// When the Plant Button is Clicked
 	$(".hold_plants .plant_click").on("click", function() {
 		// Get the info of the plant from the data base
-		plant = findPlant(parseInt($(this).attr("data-id")))
+		var id = parseInt($(this).attr("data-id"));
+		var plant = findPlant(id);
+		
+		console.log(plant);
 		
 		// Put the plant data into html code
 		var selected = `<h1>${plant.name}</h1>
