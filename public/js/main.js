@@ -22,12 +22,12 @@ $(document).ready(function() {
 	}
 
 	function findPlant(id) {
+		var plant;
 		// find the plant with the id equal to the id passed
-		$.get("/admin/api/" + id, function(data) {
-		// return plant object
-			return data;
+		$.get("/admin/plant/" + id).then(function(data) {
+			plant = data;
 		});
-
+		return plant;
 	}
 
 	function addPlant(plant) {
@@ -78,10 +78,10 @@ $(document).ready(function() {
 		// Get the info of the plant from the data base
 		
 		var id = parseInt($(this).attr("data-id"));
-		var plant = findPlant(id);
+		console.log(findPlant(id));
 
 		// Put the plant data into html code
-		displayPlant(plant);
+		
 	});
 
 	$(".selected .editBtn").on("click", function() {

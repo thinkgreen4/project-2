@@ -9,7 +9,7 @@ module.exports = function(app) {
 	});
 
 	app.get("/admin/plant/:id", function(req, res) {
-		console.log(req.params.id);
+		
 		db.Plant.findAll({
 			where: {
 				id: parseInt(req.params.id)
