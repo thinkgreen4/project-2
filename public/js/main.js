@@ -36,7 +36,8 @@ $(document).ready(function() {
 		var selected = `
 <button class="editBtn" data-id=${plant.id}>Edit<button>
 <h1>${plant.name}</h1>
-<p>${plant.description}<p>`
+<p>${plant.description}<p>
+<p>${plant.instructions}<p>`
 
 		// Display plant info on the webpage
 		$(".selected").append(selected);
@@ -81,7 +82,7 @@ $(document).ready(function() {
 
 	$(".selected .editBtn").on("click", function() {
 		var id = parseInt($(this).attr("data-id"));
-
+		console.log("This was edited!")
 		var plant_edit = {
 			name: "Lily",
 			description: "Either a flower or sometimes a person!",
@@ -89,7 +90,9 @@ $(document).ready(function() {
 		};
 
 		editPlant(id, plant_edit);
-		var plant = findPlant(id);
-		displayPlant(plant);
+		
+		$.get("/admin/plant/" + id).then(function(plant) {
+			displayPlant(plant);
+		});
 	})
 });
