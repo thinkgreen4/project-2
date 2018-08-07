@@ -21,14 +21,6 @@ $(document).ready(function() {
 		}).then()
 	}
 
-	function findPlant(id) {
-		var plant;
-		// find the plant with the id equal to the id passed
-		$.get("/admin/plant/" + id).then(function(data) {
-			plant = data;
-		});
-		return plant;
-	}
 
 	function addPlant(plant) {
 		// Create a Plant in the database
@@ -78,7 +70,10 @@ $(document).ready(function() {
 		// Get the info of the plant from the data base
 		
 		var id = parseInt($(this).attr("data-id"));
-		console.log(findPlant(id));
+		
+		$.get("/admin/plant/" + id).then(function(plant) {
+			displayPlant(plant);
+		});
 
 		// Put the plant data into html code
 		
