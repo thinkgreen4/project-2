@@ -21,14 +21,6 @@ $(document).ready(function() {
 		}).then()
 	}
 
-	function findPlant(id) {
-		// find the plant with the id equal to the id passed
-		$.get("/admin/api/" + id, function(data) {
-		// return plant object
-			return data;
-		});
-
-	}
 
 	function addPlant(plant) {
 		// Create a Plant in the database
@@ -44,7 +36,8 @@ $(document).ready(function() {
 		var selected = `
 <button class="editBtn" data-id=${plant.id}>Edit<button>
 <h1>${plant.name}</h1>
-<p>${plant.description}<p>`
+<p>${plant.description}<p>
+<p>${plant.instructions}<p>`
 
 		// Display plant info on the webpage
 		$(".selected").append(selected);
@@ -78,15 +71,18 @@ $(document).ready(function() {
 		// Get the info of the plant from the data base
 		
 		var id = parseInt($(this).attr("data-id"));
-		var plant = findPlant(id);
+		
+		$.get("/admin/plant/" + id).then(function(plant) {
+			displayPlant(plant);
+		});
 
 		// Put the plant data into html code
-		displayPlant(plant);
+		
 	});
 
 	$(".selected .editBtn").on("click", function() {
 		var id = parseInt($(this).attr("data-id"));
-
+		console.log("Hope this works")
 		var plant_edit = {
 			name: "Lily",
 			description: "Either a flower or sometimes a person!",
@@ -94,7 +90,9 @@ $(document).ready(function() {
 		};
 
 		editPlant(id, plant_edit);
-		var plant = findPlant(id);
-		displayPlant(plant);
+		
+		$.get("/admin/plant/" + id).then(function(plant) {
+			displayPlant(plant);
+		});
 	})
 });
