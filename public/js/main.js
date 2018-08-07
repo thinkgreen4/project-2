@@ -45,6 +45,7 @@ $(document).ready(function() {
 	
 	// This Button will be a Submit button
 	$("#plantBtn").on("click", function() {
+		console.log("this was hit!")
 		// Create a plant object by grabbing the inputs of the admin.
 		// The property values will need to be made by using jquery to grab the input values of the admin user
 		var plant = {
