@@ -82,7 +82,7 @@ $(document).ready(function() {
 
 	$(".selected .editBtn").on("click", function() {
 		var id = parseInt($(this).attr("data-id"));
-		console.log("This was edited!")
+		console.log("Hope this works")
 		var plant_edit = {
 			name: "Lily",
 			description: "Either a flower or sometimes a person!",
